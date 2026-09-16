@@ -4,16 +4,14 @@ import { createRoot } from "react-dom/client"
 import "../src/styles/main.css"
 import { ThemeProvider } from "@/components/providers/ThemeProvider"
 import AppRouterProvider from "./components/providers/AppRouterProvider"
-import { SidebarProvider } from "./components/ui/sidebar"
-import { AppSidebar } from "./components/AppSidebar"
+import { CookiesProvider } from "react-cookie"
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <SidebarProvider>
-        <AppSidebar />
+      <CookiesProvider>
         <AppRouterProvider />
-      </SidebarProvider>
+      </CookiesProvider>
     </ThemeProvider>
   </StrictMode>
 )
