@@ -78,7 +78,7 @@ export function AppSidebar() {
               <DropdownMenuTrigger render={<SidebarMenuButton/>} onClick={() => setIsCollapseble((prev) => !prev)}>
                 <User2 />
                 <span>John Doe</span>
-                <ChevronUp className={cn("ml-auto", isCollapseble ? "rotate-180" : "rotate-0")} />
+                <ChevronUp className={cn("ml-auto transition-all duration-200", isCollapseble ? "rotate-180" : "rotate-0")} />
               </DropdownMenuTrigger>
               <DropdownMenuContent>
                 <DropdownMenuItem>Account</DropdownMenuItem>
