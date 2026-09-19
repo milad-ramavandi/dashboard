@@ -1,5 +1,9 @@
 const paths = {
-    home: "/"
+    home: "/",
+    users: {
+        root: "/users",
+        user: "/users/:id"
+    }
 }
 
 export default paths;
