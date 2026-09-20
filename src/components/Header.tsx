@@ -16,7 +16,7 @@ import { SidebarTrigger } from "./ui/sidebar"
 
 const Header = () => {
   return (
-    <header className="flex items-center justify-between">
+    <header className="flex items-center justify-between sticky top-0 h-12.25 bg-primary-foreground border-b border-foreground/10 z-10 mb-10">
       <SidebarTrigger className={"cursor-pointer"} />
       <div className="flex items-center justify-between p-4">
         <div className="flex items-center gap-4">

@@ -1,4 +1,7 @@
+import AppLineChart from "@/components/AppLineChart"
 import CardsList from "@/components/CardsList"
+import EditUserForm from "@/components/EditUserForm"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import {
   Breadcrumb,
@@ -121,6 +124,7 @@ const UserPage = () => {
                       This action cannot be undone.
                     </SheetDescription>
                   </SheetHeader>
+                  <EditUserForm />
                 </SheetContent>
               </Sheet>
             </div>
@@ -159,8 +163,22 @@ const UserPage = () => {
           </div>
         </div>
         <div className="w-full space-y-6 xl:w-2/3">
-          <div className="rounded-lg bg-primary-foreground p-4">User Card</div>
-          <div className="rounded-lg bg-primary-foreground p-4">Chart</div>
+          <div className="space-y-2 rounded-lg bg-primary-foreground p-4">
+            <div className="flex items-center gap-2">
+              <Avatar size="lg">
+                <AvatarImage src="https://github.com/shadcn.png" />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
+              <p className="text-xl font-semibold">John Doe</p>
+            </div>
+            <p className="text-sm text-muted-foreground">
+              An image element with a fallback for representing the user.
+            </p>
+          </div>
+          <div className="rounded-lg bg-primary-foreground p-4">
+            <p className="text-xl font-semibold">User Activity</p>
+            <AppLineChart/>
+          </div>
         </div>
       </div>
     </div>
