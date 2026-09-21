@@ -3,7 +3,8 @@ const paths = {
     users: {
         root: "/users",
         user: "/users/:id"
-    }
+    },
+    payments: "/payments"
 }
 
 export default paths;

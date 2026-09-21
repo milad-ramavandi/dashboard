@@ -4,6 +4,7 @@ import Home from "@/screens/Home"
 import AppLayout from "@/components/layouts/AppLayout"
 import UsersPage from "@/screens/users"
 import UserPage from "@/screens/users/user"
+import PaymentsPage from "@/screens/payments"
 
 const routes = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const routes = createBrowserRouter([
         path: paths.users.user,
         element: <UserPage />,
       },
+      {
+        path: paths.payments,
+        element: <PaymentsPage/>
+      }
     ],
   },
 ])
