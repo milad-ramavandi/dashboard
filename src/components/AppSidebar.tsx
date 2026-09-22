@@ -15,18 +15,34 @@ import {
 import { LOGO } from "@/constants"
 import paths from "@/routes/paths"
 import {
+  Blocks,
+  Box,
   Calendar,
   ChevronUp,
+  CreditCard,
+  CreditCardPlus,
+  FolderPlus,
   Home,
   Inbox,
+  Plus,
   Search,
   Settings,
   User2,
+  UserGroup,
+  UserPlus,
 } from "lucide-react"
 import { Link } from "react-router"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./ui/dropdown-menu"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu"
 import { useState } from "react"
 import { cn } from "cn"
+import { Button } from "./ui/button"
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "./ui/sheet"
+import AddProductForm from "./AddProductForm"
 
 const items = [
   { title: "Home", url: paths.home, icon: <Home /> },
@@ -38,7 +54,7 @@ const items = [
 
 export function AppSidebar() {
   const [isCollapseble, setIsCollapseble] = useState<boolean>(true)
-  
+
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader>
@@ -51,7 +67,7 @@ export function AppSidebar() {
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
-      <SidebarSeparator/>
+      <SidebarSeparator />
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>Application</SidebarGroupLabel>
@@ -64,10 +80,143 @@ export function AppSidebar() {
                       <>{item.icon}</>
                       <span>{item.title}</span>
                     </SidebarMenuButton>
-                    {item.title === "Inbox" && <SidebarMenuBadge>24</SidebarMenuBadge>}
+                    {item.title === "Inbox" && (
+                      <SidebarMenuBadge>24</SidebarMenuBadge>
+                    )}
                   </SidebarMenuItem>
                 )
               })}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+        <SidebarGroup>
+          <SidebarGroupLabel>Products</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton
+                  render={
+                    <Link to={paths.products.root}>
+                      <Box />
+                      <span>See All Products</span>
+                    </Link>
+                  }
+                />
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <Sheet>
+                  <SheetTrigger
+                    render={
+                      <SidebarMenuButton
+                        render={
+                          <Button variant={"ghost"} className={"justify-start"}>
+                            <Blocks />
+                            <span>Add Product</span>
+                          </Button>
+                        }
+                      />
+                    }
+                  />
+                  <SheetContent>
+                    <SheetTitle>Add Product</SheetTitle>
+                    <AddProductForm />
+                  </SheetContent>
+                </Sheet>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <Sheet>
+                  <SheetTrigger
+                    render={
+                      <SidebarMenuButton
+                        render={
+                          <Button variant={"ghost"} className={"justify-start"}>
+                            <FolderPlus />
+                            <span>Add Category</span>
+                          </Button>
+                        }
+                      />
+                    }
+                  />
+                  <SheetContent>
+                    <SheetTitle>Add Category</SheetTitle>
+                    <AddProductForm />
+                  </SheetContent>
+                </Sheet>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+        <SidebarGroup>
+          <SidebarGroupLabel>Users</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton
+                  render={
+                    <Link to={paths.users.root}>
+                      <UserGroup />
+                      <span>See All Users</span>
+                    </Link>
+                  }
+                />
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <Sheet>
+                  <SheetTrigger
+                    render={
+                      <SidebarMenuButton
+                        render={
+                          <Button variant={"ghost"} className={"justify-start"}>
+                            <UserPlus />
+                            <span>Add User</span>
+                          </Button>
+                        }
+                      />
+                    }
+                  />
+                  <SheetContent>
+                    <SheetTitle>Add User</SheetTitle>
+                    <AddProductForm />
+                  </SheetContent>
+                </Sheet>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+        <SidebarGroup>
+          <SidebarGroupLabel>Payments / Transactions</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton
+                  render={
+                    <Link to={paths.payments.root}>
+                      <CreditCard />
+                      <span>See All Payments</span>
+                    </Link>
+                  }
+                />
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <Sheet>
+                  <SheetTrigger
+                    render={
+                      <SidebarMenuButton
+                        render={
+                          <Button variant={"ghost"} className={"justify-start"}>
+                            <CreditCardPlus />
+                            <span>Add Order</span>
+                          </Button>
+                        }
+                      />
+                    }
+                  />
+                  <SheetContent>
+                    <SheetTitle>Add Order</SheetTitle>
+                    <AddProductForm />
+                  </SheetContent>
+                </Sheet>
+              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
@@ -76,10 +225,18 @@ export function AppSidebar() {
         <SidebarMenu>
           <SidebarMenuItem>
             <DropdownMenu>
-              <DropdownMenuTrigger render={<SidebarMenuButton/>} onClick={() => setIsCollapseble((prev) => !prev)}>
+              <DropdownMenuTrigger
+                render={<SidebarMenuButton />}
+                onClick={() => setIsCollapseble((prev) => !prev)}
+              >
                 <User2 />
                 <span>John Doe</span>
-                <ChevronUp className={cn("ml-auto transition-all duration-200", isCollapseble ? "rotate-180" : "rotate-0")} />
+                <ChevronUp
+                  className={cn(
+                    "ml-auto transition-all duration-200",
+                    isCollapseble ? "rotate-180" : "rotate-0"
+                  )}
+                />
               </DropdownMenuTrigger>
               <DropdownMenuContent>
                 <DropdownMenuItem>Account</DropdownMenuItem>

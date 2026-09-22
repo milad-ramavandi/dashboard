@@ -20,7 +20,7 @@ export function Home() {
         <AppAreaChart/>
       </div>
       <div className="bg-primary-foreground rounded-lg p-4">
-        <CardsList title="Popular Content"/>
+        <CardsList title="Popular Products"/>
       </div>
       <div className="bg-primary-foreground rounded-lg p-4">
         <TodosList/>

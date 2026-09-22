@@ -13,15 +13,16 @@ import {
 import { Button } from "@/components/ui/button"
 import { ArrowUpDown, MoreHorizontal } from "lucide-react"
 import { Checkbox } from "@/components/ui/checkbox"
-import type { IPayment } from "@/types"
+import type { IPayment, IProduct } from "@/types"
 import { Link } from "react-router"
 import paths from "@/routes/paths"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 // Use `accessor` for data columns and `display` for columns without one.
-const columnHelper = createColumnHelper<DataTableFeatures, IPayment>()
+const columnHelper = createColumnHelper<DataTableFeatures, IProduct>()
 
 export const columns = columnHelper.columns([
-   columnHelper.display({
+  columnHelper.display({
     id: "select",
     header: ({ table }) => (
       <Checkbox
@@ -43,10 +44,22 @@ export const columns = columnHelper.columns([
     enableSorting: false,
     enableHiding: false,
   }),
-  columnHelper.accessor("fullname", {
-    header: "Fullname",
+  columnHelper.accessor("images", {
+    header: "image",
+    cell: ({ row }) => {
+      const product = row.original
+      return (
+        <Avatar>
+          <AvatarImage src={product.images[product.colors[0]]} />
+          <AvatarFallback>{product.name}</AvatarFallback>
+        </Avatar>
+      )
+    },
   }),
-  columnHelper.accessor("email", {
+  columnHelper.accessor("name", {
+    header: "Name",
+  }),
+  columnHelper.accessor("price", {
     header: ({ column }) => {
       return (
         <Button
@@ -54,41 +67,23 @@ export const columns = columnHelper.columns([
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           className={"cursor-pointer"}
         >
-          Email
+          Price
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       )
     },
-  }),
-  columnHelper.accessor("status", {
-    header: "Status",
     cell: ({ row }) => {
-      const status = row.getValue("status") as string
-      const varient =
-        status === "failed"
-          ? "destructive"
-          : status === "success"
-            ? "success"
-            : "default"
-      return <Badge variant={varient}>{status}</Badge>
+      const product = row.original
+      return <p>${product.price.toFixed(2)}</p>
     },
   }),
-  columnHelper.accessor("amount", {
-    header: () => <div className="text-right">Amount</div>,
-    cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("amount"))
-      const formatted = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-      }).format(amount)
-
-      return <div className="text-right font-medium">{formatted}</div>
-    },
+  columnHelper.accessor("shortDescription", {
+    header: "Description",
   }),
   columnHelper.display({
     id: "actions",
     cell: ({ row }) => {
-      const payment = row.original
+      const product = row.original
 
       return (
         <DropdownMenu>
@@ -104,13 +99,15 @@ export const columns = columnHelper.columns([
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
             </DropdownMenuGroup>
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id)}
+              onClick={() => navigator.clipboard.writeText(String(product.id))}
             >
-              Copy payment ID
+              Copy Product ID
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
-              <Link to={paths.payments.payment.replace(":id", payment.id)}>View payment</Link>
+              <Link to={paths.products.product.replace(":id", String(product.id))}>
+                View product
+              </Link>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

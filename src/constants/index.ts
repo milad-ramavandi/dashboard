@@ -1,3 +1,5 @@
+import type { IProduct, ITransaction } from "@/types";
+
 // ADDRESS LOCAL IMAGES
 export const LOGO = "./src/assets/logo.png";
 
@@ -612,54 +614,122 @@ export const todosList = [
 ];
 
 // POPULAR CONTENT
-export const popularContent = [
+export const popularProducts: IProduct[] = [
   {
     id: 1,
-    title: "JavaScript Tutorial",
-    badge: "Coding",
-    image:
-      "https://images.pexels.com/photos/3861964/pexels-photo-3861964.jpeg?auto=compress&cs=tinysrgb&w=800",
-    count: 4300,
+    name: "Adidas CoreFit T-Shirt",
+    shortDescription:
+      "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+    description:
+      "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+    price: 39.9,
+    sizes: ["s", "m", "l", "xl", "xxl"],
+    colors: ["gray", "purple", "green"],
+    images: {
+      gray: "./src/assets/products/1g.png",
+      purple: "./src/assets/products/1p.png",
+      green: "./src/assets/products/1gr.png",
+    },
   },
   {
     id: 2,
-    title: "Tech Trends 2025",
-    badge: "Tech",
-    image:
-      "https://images.pexels.com/photos/1714208/pexels-photo-1714208.jpeg?auto=compress&cs=tinysrgb&w=800",
-    count: 3200,
+    name: "Puma Ultra Warm Zip",
+    shortDescription:
+      "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+    description:
+      "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+    price: 59.9,
+    sizes: ["s", "m", "l", "xl"],
+    colors: ["gray", "green"],
+    images: { gray: "./src/assets/products/2g.png", green: "./src/assets/products/2gr.png" },
   },
   {
     id: 3,
-    title: "The Future of AI",
-    badge: "AI",
-    image:
-      "https://images.pexels.com/photos/2007647/pexels-photo-2007647.jpeg?auto=compress&cs=tinysrgb&w=800",
-    count: 2400,
+    name: "Nike Air Essentials Pullover",
+    shortDescription:
+      "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+    description:
+      "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+    price: 69.9,
+    sizes: ["s", "m", "l"],
+    colors: ["green", "blue", "black"],
+    images: {
+      green: "./src/assets/products/3gr.png",
+      blue: "./src/assets/products/3b.png",
+      black: "./src/assets/products/3bl.png",
+    },
   },
   {
     id: 4,
-    title: "React Hooks Explained",
-    badge: "Coding",
-    image:
-      "https://images.pexels.com/photos/943096/pexels-photo-943096.jpeg?auto=compress&cs=tinysrgb&w=800",
-    count: 1500,
+    name: "Nike Dri Flex T-Shirt",
+    shortDescription:
+      "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+    description:
+      "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+    price: 29.9,
+    sizes: ["s", "m", "l"],
+    colors: ["white", "pink"],
+    images: { white: "./src/assets/products/4w.png", pink: "./src/assets/products/4p.png" },
   },
   {
     id: 5,
-    title: "Image Generation with AI",
-    badge: "AI",
-    image:
-      "https://images.pexels.com/photos/3094799/pexels-photo-3094799.jpeg?auto=compress&cs=tinysrgb&w=800",
-    count: 1200,
+    name: "Under Armour StormFleece",
+    shortDescription:
+      "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+    description:
+      "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+    price: 49.9,
+    sizes: ["s", "m", "l"],
+    colors: ["red", "orange", "black"],
+    images: {
+      red: "./src/assets/products/5r.png",
+      orange: "./src/assets/products/5o.png",
+      black: "./src/assets/products/5bl.png",
+    },
   },
-]
+  {
+    id: 6,
+    name: "Nike Air Max 270",
+    shortDescription:
+      "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+    description:
+      "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+    price: 59.9,
+    sizes: ["40", "42", "43", "44"],
+    colors: ["gray", "white"],
+    images: { gray: "./src/assets/products/6g.png", white: "./src/assets/products/6w.png" },
+  },
+  {
+    id: 7,
+    name: "Nike Ultraboost Pulse ",
+    shortDescription:
+      "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+    description:
+      "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+    price: 69.9,
+    sizes: ["40", "42", "43"],
+    colors: ["gray", "pink"],
+    images: { gray: "./src/assets/products/7g.png", pink: "./src/assets/products/7p.png" },
+  },
+  {
+    id: 8,
+    name: "Levi’s Classic Denim",
+    shortDescription:
+      "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+    description:
+      "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+    price: 59.9,
+    sizes: ["s", "m", "l"],
+    colors: ["blue", "green"],
+    images: { blue: "./src/assets/products/8b.png", green: "./src/assets/products/8gr.png" },
+  },
+];
 
 //LATEST TRANSACTIONS
-export const latestTransactions = [
+export const latestTransactions: ITransaction[] = [
   {
     id: 1,
-    title: "Subscription Renewal",
+    title: "Order Payment",
     badge: "John Doe",
     image:
       "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=800",
@@ -667,7 +737,7 @@ export const latestTransactions = [
   },
   {
     id: 2,
-    title: "Payment for Services",
+    title: "Order Payment",
     badge: "Jane Smith",
     image:
       "https://images.pexels.com/photos/4969918/pexels-photo-4969918.jpeg?auto=compress&cs=tinysrgb&w=800",
@@ -675,7 +745,7 @@ export const latestTransactions = [
   },
   {
     id: 3,
-    title: "Subscription Renewal",
+    title: "Order Payment",
     badge: "Michael Johnson",
     image:
       "https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&w=800",
@@ -684,14 +754,14 @@ export const latestTransactions = [
   {
     id: 4,
     title: "Payment for Services",
-    badge: "Lily Adams",
+    badge: "Order Payment",
     image:
       "https://images.pexels.com/photos/712513/pexels-photo-712513.jpeg?auto=compress&cs=tinysrgb&w=800",
     count: 2500,
   },
   {
     id: 5,
-    title: "Subscription Renewal",
+    title: "Order Payment",
     badge: "Sam Brown",
     image:
       "https://images.pexels.com/photos/1680175/pexels-photo-1680175.jpeg?auto=compress&cs=tinysrgb&w=800",

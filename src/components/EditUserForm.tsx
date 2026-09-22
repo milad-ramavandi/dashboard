@@ -3,21 +3,14 @@ import Form from "./Form"
 import { Field, FieldError, FieldGroup, FieldLabel } from "./ui/field"
 import { Controller } from "react-hook-form"
 import { Input } from "./ui/input"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "./ui/select"
 import { Button } from "./ui/button"
 
 const validationSchema = Yup.object().shape({
-  username: Yup.string().required("Username is required."),
+  fullname: Yup.string().required("Fullname is required."),
   email: Yup.string().email("Invalid Email").required("Email is required."),
   phone: Yup.string().required("Phone is required."),
-  location: Yup.string().required("Location is required."),
-  role: Yup.string().oneOf(["admin", "user"]),
+  city: Yup.string().required("Location is required."),
+  address: Yup.string().required("Location is required."),
 })
 
 type TInputsEditUserForm = Yup.InferType<typeof validationSchema>
@@ -27,10 +20,10 @@ const EditUserForm = () => {
     console.log(data)
   }
   const defaultValues: TInputsEditUserForm = {
-    username: "",
+    fullname: "",
     email: "",
-    location: "",
-    role: "user",
+    address: "",
+    city: "",
     phone: "",
   }
   return (
@@ -46,16 +39,16 @@ const EditUserForm = () => {
           >
             <FieldGroup>
               <Controller
-                name="username"
+                name="fullname"
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="username">Username</FieldLabel>
+                    <FieldLabel htmlFor="fullname">Fullname</FieldLabel>
                     <Input
                       {...field}
-                      id="username"
+                      id="fullname"
                       aria-invalid={fieldState.invalid}
-                      placeholder="Enter Username"
+                      placeholder="Enter Fullname"
                       autoComplete="off"
                     />
                     {fieldState.invalid && (
@@ -103,16 +96,16 @@ const EditUserForm = () => {
                 )}
               />
               <Controller
-                name="location"
+                name="address"
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="location">Location</FieldLabel>
+                    <FieldLabel htmlFor="address">Address</FieldLabel>
                     <Input
                       {...field}
-                      id="location"
+                      id="address"
                       aria-invalid={fieldState.invalid}
-                      placeholder="Enter Location"
+                      placeholder="Enter Address"
                       autoComplete="off"
                     />
                     {fieldState.invalid && (
@@ -122,27 +115,18 @@ const EditUserForm = () => {
                 )}
               />
               <Controller
-                name="role"
+                name="city"
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="role">Role</FieldLabel>
-                    <Select
-                      name={field.name}
-                      value={field.value}
-                      onValueChange={field.onChange}
-                    >
-                      <SelectTrigger
-                        id="form-rhf-select-language"
-                        aria-invalid={fieldState.invalid}
-                      >
-                        <SelectValue placeholder="Select Role" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="admin">Admin</SelectItem>
-                        <SelectItem value="user">User</SelectItem>
-                      </SelectContent>
-                    </Select>
+                    <FieldLabel htmlFor="city">City</FieldLabel>
+                    <Input
+                      {...field}
+                      id="city"
+                      aria-invalid={fieldState.invalid}
+                      placeholder="Enter City"
+                      autoComplete="off"
+                    />
                     {fieldState.invalid && (
                       <FieldError errors={[fieldState.error]} />
                     )}

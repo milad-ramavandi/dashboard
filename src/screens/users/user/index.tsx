@@ -112,57 +112,6 @@ const UserPage = () => {
               </HoverCard>
             </div>
           </div>
-          <div className="space-y-4 rounded-lg bg-primary-foreground p-4">
-            <div className="flex items-center justify-between">
-              <p className="text-xl font-semibold">User Information</p>
-              <Sheet>
-                <SheetTrigger render={<Button>Edit User</Button>} />
-                <SheetContent>
-                  <SheetHeader>
-                    <SheetTitle>Are you absolutely sure?</SheetTitle>
-                    <SheetDescription>
-                      This action cannot be undone.
-                    </SheetDescription>
-                  </SheetHeader>
-                  <EditUserForm />
-                </SheetContent>
-              </Sheet>
-            </div>
-            <div className="space-y-4">
-              <p className="text-sm text-muted-foreground">
-                Profile Completion
-              </p>
-              <Progress value={65} />
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="font-bold">Username:</span>
-              <span>john.doe</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="font-bold">Email:</span>
-              <span>john.doe@gmail.com</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="font-bold">Phone:</span>
-              <span>+1 234 5678</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="font-bold">Location:</span>
-              <span>New York, NY</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="font-bold">Role:</span>
-              <Badge>Admin</Badge>
-            </div>
-            <p className="mt-4 text-sm text-muted-foreground">
-              Joined on 2025.01.01
-            </p>
-          </div>
-          <div className="rounded-lg bg-primary-foreground p-4">
-            <CardsList title="Latest Transaction" />
-          </div>
-        </div>
-        <div className="w-full space-y-6 xl:w-2/3">
           <div className="space-y-2 rounded-lg bg-primary-foreground p-4">
             <div className="flex items-center gap-2">
               <Avatar size="lg">
@@ -175,9 +124,54 @@ const UserPage = () => {
               An image element with a fallback for representing the user.
             </p>
           </div>
+          <div className="space-y-4 rounded-lg bg-primary-foreground p-4">
+            <div className="flex items-center justify-between">
+              <p className="text-xl font-semibold">User Information</p>
+              <Sheet>
+                <SheetTrigger render={<Button>Edit User</Button>} />
+                <SheetContent>
+                  <SheetHeader>
+                    <SheetTitle>Edit User</SheetTitle>
+                  </SheetHeader>
+                  <EditUserForm />
+                </SheetContent>
+              </Sheet>
+            </div>
+            <div className="space-y-4">
+              <p className="text-sm text-muted-foreground">
+                Profile Completion
+              </p>
+              <Progress value={65} />
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="font-bold">Fullname:</span>
+              <span>John Doe</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="font-bold">Email:</span>
+              <span>john.doe@gmail.com</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="font-bold">Phone:</span>
+              <span>+1 234 5678</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="font-bold">Address:</span>
+              <span>3423 Main Street</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="font-bold">City:</span>
+              <span>New York, NY</span>
+            </div>
+            <p className="mt-4 text-sm text-muted-foreground">
+              Joined on 2025.01.01
+            </p>
+          </div>
+        </div>
+        <div className="w-full xl:w-2/3">
           <div className="rounded-lg bg-primary-foreground p-4">
             <p className="text-xl font-semibold">User Activity</p>
-            <AppLineChart/>
+            <AppLineChart />
           </div>
         </div>
       </div>
