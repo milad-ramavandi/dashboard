@@ -31,7 +31,7 @@ const chartData = [
 const AppBarChart = () => {
   return (
     <div className="space-y-6">
-      <p className="text-lg font-medium">Total Revenue ($M)</p>
+      <p className="text-lg font-medium">Total Transactions</p>
       <ChartContainer config={chartConfig} className="min-h-50 w-full">
         <BarChart accessibilityLayer data={chartData}>
           <CartesianGrid vertical={false} />

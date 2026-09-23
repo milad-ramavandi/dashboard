@@ -24,7 +24,6 @@ import {
   FolderPlus,
   Home,
   Inbox,
-  Plus,
   Search,
   Settings,
   User2,
@@ -41,8 +40,17 @@ import {
 import { useState } from "react"
 import { cn } from "cn"
 import { Button } from "./ui/button"
-import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "./ui/sheet"
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "./ui/sheet"
 import AddProductForm from "./AddProductForm"
+import AddOrderForm from "./AddOrderForm"
+import AddUserForm from "./AddUserForm"
+import AddCategoryForm from "./AddCategoryForm"
 
 const items = [
   { title: "Home", url: paths.home, icon: <Home /> },
@@ -118,7 +126,9 @@ export function AppSidebar() {
                     }
                   />
                   <SheetContent>
-                    <SheetTitle>Add Product</SheetTitle>
+                    <SheetHeader>
+                      <SheetTitle>Add Product</SheetTitle>
+                    </SheetHeader>
                     <AddProductForm />
                   </SheetContent>
                 </Sheet>
@@ -138,8 +148,10 @@ export function AppSidebar() {
                     }
                   />
                   <SheetContent>
-                    <SheetTitle>Add Category</SheetTitle>
-                    <AddProductForm />
+                    <SheetHeader>
+                      <SheetTitle>Add Category</SheetTitle>
+                    </SheetHeader>
+                    <AddCategoryForm />
                   </SheetContent>
                 </Sheet>
               </SidebarMenuItem>
@@ -175,8 +187,10 @@ export function AppSidebar() {
                     }
                   />
                   <SheetContent>
-                    <SheetTitle>Add User</SheetTitle>
-                    <AddProductForm />
+                    <SheetHeader>
+                      <SheetTitle>Add User</SheetTitle>
+                    </SheetHeader>
+                    <AddUserForm />
                   </SheetContent>
                 </Sheet>
               </SidebarMenuItem>
@@ -212,8 +226,10 @@ export function AppSidebar() {
                     }
                   />
                   <SheetContent>
-                    <SheetTitle>Add Order</SheetTitle>
-                    <AddProductForm />
+                    <SheetHeader>
+                      <SheetTitle>Add Order</SheetTitle>
+                    </SheetHeader>
+                    <AddOrderForm />
                   </SheetContent>
                 </Sheet>
               </SidebarMenuItem>
