@@ -15,7 +15,7 @@ const validationSchema = Yup.object().shape({
   fullname: Yup.string().required("Fullname is required."),
   email: Yup.string().email("Email invalid").required("Email is required."),
   status: Yup.string().required("Status is required."),
-  amount: Yup.number().required("Amount is required."),
+  amount: Yup.number().positive('Amount must be positive').required("Amount is required."),
 })
 
 type TInputsForm = Yup.InferType<typeof validationSchema>

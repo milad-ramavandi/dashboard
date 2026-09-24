@@ -768,3 +768,51 @@ export const latestTransactions: ITransaction[] = [
     count: 1400,
   },
 ]
+
+export const product_categories_list: string[] = [
+  "T-shirts",
+  "Shoes",
+  "Accessories",
+  "Bags",
+  "Dresses",
+  "Jackets",
+  "Gloves"
+]
+
+export const product_sizes_list:string[] = [
+  "xs",
+  "s",
+  "m",
+  "l",
+  "xl",
+  "xxl",
+  "34",
+  "35",
+  "36",
+  "37",
+  "38",
+  "39",
+  "40",
+  "41",
+  "42",
+  "43",
+  "44",
+  "45",
+  "46",
+  "47",
+  "48"
+]
+
+export const product_colors_list:string[] = [
+  "blue",
+  "green",
+  "red",
+  "yellow",
+  "purple",
+  "orange",
+  "pink",
+  "brown",
+  "gray",
+  "black",
+  "white"
+]
