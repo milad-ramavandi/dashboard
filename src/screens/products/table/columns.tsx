@@ -13,7 +13,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { ArrowUpDown, MoreHorizontal } from "lucide-react"
 import { Checkbox } from "@/components/ui/checkbox"
-import type { IPayment, IProduct } from "@/types"
+import type { IProduct } from "@/types"
 import { Link } from "react-router"
 import paths from "@/routes/paths"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
@@ -50,7 +50,7 @@ export const columns = columnHelper.columns([
       const product = row.original
       return (
         <Avatar>
-          <AvatarImage src={product.images[product.colors[0]]} />
+          <AvatarImage src={product.images[0].imageUrl} />
           <AvatarFallback>{product.name}</AvatarFallback>
         </Avatar>
       )

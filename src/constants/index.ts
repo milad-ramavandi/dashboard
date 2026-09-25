@@ -613,7 +613,7 @@ export const todosList = [
   },
 ];
 
-// POPULAR CONTENT
+// 
 export const popularProducts: IProduct[] = [
   {
     id: 1,
@@ -625,11 +625,11 @@ export const popularProducts: IProduct[] = [
     price: 39.9,
     sizes: ["s", "m", "l", "xl", "xxl"],
     colors: ["gray", "purple", "green"],
-    images: {
-      gray: "./src/assets/products/1g.png",
-      purple: "./src/assets/products/1p.png",
-      green: "./src/assets/products/1gr.png",
-    },
+    images: [
+      { color: "gray", imageUrl: "./src/assets/products/1g.png" },
+      { color: "purple", imageUrl: "./src/assets/products/1p.png" },
+      { color: "green", imageUrl: "./src/assets/products/1gr.png" },
+    ],
   },
   {
     id: 2,
@@ -641,7 +641,10 @@ export const popularProducts: IProduct[] = [
     price: 59.9,
     sizes: ["s", "m", "l", "xl"],
     colors: ["gray", "green"],
-    images: { gray: "./src/assets/products/2g.png", green: "./src/assets/products/2gr.png" },
+    images: [
+      { color: "gray", imageUrl: "./src/assets/products/2g.png" },
+      { color: "green", imageUrl: "./src/assets/products/2gr.png" },
+    ],
   },
   {
     id: 3,
@@ -653,11 +656,11 @@ export const popularProducts: IProduct[] = [
     price: 69.9,
     sizes: ["s", "m", "l"],
     colors: ["green", "blue", "black"],
-    images: {
-      green: "./src/assets/products/3gr.png",
-      blue: "./src/assets/products/3b.png",
-      black: "./src/assets/products/3bl.png",
-    },
+    images: [
+      { color: "green", imageUrl: "./src/assets/products/3gr.png" },
+      { color: "blue", imageUrl: "./src/assets/products/3b.png" },
+      { color: "black", imageUrl: "./src/assets/products/3bl.png" },
+    ],
   },
   {
     id: 4,
@@ -669,7 +672,10 @@ export const popularProducts: IProduct[] = [
     price: 29.9,
     sizes: ["s", "m", "l"],
     colors: ["white", "pink"],
-    images: { white: "./src/assets/products/4w.png", pink: "./src/assets/products/4p.png" },
+    images: [
+      { color: "white", imageUrl: "./src/assets/products/4w.png" },
+      { color: "pink", imageUrl: "./src/assets/products/4p.png" },
+    ],
   },
   {
     id: 5,
@@ -681,11 +687,11 @@ export const popularProducts: IProduct[] = [
     price: 49.9,
     sizes: ["s", "m", "l"],
     colors: ["red", "orange", "black"],
-    images: {
-      red: "./src/assets/products/5r.png",
-      orange: "./src/assets/products/5o.png",
-      black: "./src/assets/products/5bl.png",
-    },
+    images: [
+      { color: "red", imageUrl: "./src/assets/products/5r.png" },
+      { color: "orange", imageUrl: "./src/assets/products/5o.png" },
+      { color: "black", imageUrl: "./src/assets/products/5bl.png" },
+    ],
   },
   {
     id: 6,
@@ -697,7 +703,10 @@ export const popularProducts: IProduct[] = [
     price: 59.9,
     sizes: ["40", "42", "43", "44"],
     colors: ["gray", "white"],
-    images: { gray: "./src/assets/products/6g.png", white: "./src/assets/products/6w.png" },
+    images: [
+      { color: "gray", imageUrl: "./src/assets/products/6g.png" },
+      { color: "white", imageUrl: "./src/assets/products/6w.png" },
+    ],
   },
   {
     id: 7,
@@ -709,7 +718,10 @@ export const popularProducts: IProduct[] = [
     price: 69.9,
     sizes: ["40", "42", "43"],
     colors: ["gray", "pink"],
-    images: { gray: "./src/assets/products/7g.png", pink: "./src/assets/products/7p.png" },
+    images: [
+      { color: "gray", imageUrl: "./src/assets/products/7g.png" },
+      { color: "pink", imageUrl: "./src/assets/products/7p.png" },
+    ],
   },
   {
     id: 8,
@@ -721,7 +733,10 @@ export const popularProducts: IProduct[] = [
     price: 59.9,
     sizes: ["s", "m", "l"],
     colors: ["blue", "green"],
-    images: { blue: "./src/assets/products/8b.png", green: "./src/assets/products/8gr.png" },
+    images: [
+      { color: "blue", imageUrl: "./src/assets/products/8b.png" },
+      { color: "green", imageUrl: "./src/assets/products/8gr.png" },
+    ],
   },
 ];
 

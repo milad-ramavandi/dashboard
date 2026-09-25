@@ -21,7 +21,7 @@ const Header = () => {
       <div className="flex items-center justify-between p-4">
         <div className="flex items-center gap-4">
           <Link to={paths.home}>
-            <House />
+            <House className="w-5 h-5 text-muted-foreground"/>
           </Link>
           <ModeToggle />
           <DropdownMenu>

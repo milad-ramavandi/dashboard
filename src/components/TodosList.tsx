@@ -40,7 +40,7 @@ const TodosList = () => {
           />
         </PopoverContent>
       </Popover>
-      <ScrollArea className={"w-full h-100 space-y-6"}>
+      <ScrollArea className={"w-full h-160 space-y-6"}>
         <div className="space-y-4">
           {todosList.map((todo) => {
             return (

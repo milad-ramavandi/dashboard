@@ -1,7 +1,14 @@
 import * as Yup from "yup"
 import Form from "./Form"
-import { Field, FieldError, FieldGroup, FieldLabel } from "./ui/field"
-import { Controller } from "react-hook-form"
+import {
+  Field,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+  FieldLegend,
+  FieldSet,
+} from "./ui/field"
+import { Controller, useFieldArray, useWatch } from "react-hook-form"
 import { Input } from "./ui/input"
 import {
   InputGroup,
@@ -33,7 +40,9 @@ import {
 } from "./ui/combobox"
 import { Button } from "./ui/button"
 import { ScrollArea } from "./ui/scroll-area"
-import { useRef } from "react"
+import { useEffect, useRef } from "react"
+import { ImagePlus, X } from "lucide-react"
+import { cn } from "cn"
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required("Name is required."),
@@ -55,32 +64,12 @@ const validationSchema = Yup.object().shape({
     .of(Yup.string().required())
     .min(1, "At least one color is required.")
     .required("Colors is required."),
-  images: Yup.object({} as Record<string, Yup.StringSchema>)
-    .test(
-      "match-colors",
-      "Images required", // Fallback text
-      function (imagesValue) {
-        const selectedColors: string[] = this.parent.colors || []
-        if (selectedColors.length === 0) return true
-
-        const imagesObj = imagesValue || {}
-        // Find all selected colors that don't have a value in our record
-        const missingColors = selectedColors.filter(
-          (color) => !imagesObj[color]
-        )
-
-        if (missingColors.length > 0) {
-          // Create an explicit list of missing items (e.g., "Red, Blue")
-          const formattedList = missingColors
-            .map((c) => c.charAt(0).toUpperCase() + c.slice(1))
-            .join(", ")
-
-          return this.createError({
-            message: `Missing images for: ${formattedList}`,
-          })
-        }
-        return true
-      }
+  images: Yup.array()
+    .of(
+      Yup.object().shape({
+        color: Yup.string().required(),
+        imageUrl: Yup.string().required("Image is required."),
+      })
     )
     .required("Images is required."),
 })
@@ -95,10 +84,9 @@ const defaultValues: TInputsForm = {
   category: "",
   sizes: [],
   colors: [],
-  images: {},
+  images: [],
 }
 const AddProductForm = () => {
-  const fileInputRefs = useRef<Record<string, HTMLInputElement | null>>({})
   const onSubmit = (data: TInputsForm) => {
     console.log(data)
   }
@@ -109,6 +97,23 @@ const AddProductForm = () => {
         defaultValues={defaultValues}
       >
         {({ form }) => {
+          const fileInput = useRef<Record<number, HTMLInputElement | null>>({})
+          const { fields, replace } = useFieldArray({
+            control: form.control,
+            name: "images",
+          })
+          const selectedColors = useWatch({
+            control: form.control,
+            name: "colors",
+          })
+          useEffect(() => {
+            const current = form.getValues("images") || []
+            const next = selectedColors.map((color) => {
+              const existing = current.find((img) => img?.color === color)
+              return existing ?? { color, imageUrl: "" }
+            })
+            replace(next)
+          }, [selectedColors])
           return (
             <form
               onSubmit={form.handleSubmit(onSubmit)}
@@ -343,131 +348,95 @@ const AddProductForm = () => {
                     </Field>
                   )}
                 />
-                <Controller
-                  name="images"
-                  control={form.control}
-                  render={({ field, fieldState }) => {
-                    const selectedColors: string[] = form.watch("colors") || []
-                    const imagesRecord = field.value || {}
-
-                    const handleFileChange = (
-                      color: string,
-                      e: React.ChangeEvent<HTMLInputElement>
-                    ) => {
-                      const file = e.target.files?.[0]
-                      if (!file) return
-
-                      const localUrl = URL.createObjectURL(file)
-                      field.onChange({
-                        ...imagesRecord,
-                        [color]: localUrl,
-                      })
-                    }
-
-                    const removeImageForColor = (color: string) => {
-                      const updatedImages = { ...imagesRecord }
-                      if (updatedImages[color]?.startsWith("blob:")) {
-                        URL.revokeObjectURL(updatedImages[color])
-                      }
-                      delete updatedImages[color]
-                      field.onChange(updatedImages)
-
-                      // Reset the DOM file input native state so users can upload the same image back-to-back if needed
-                      if (fileInputRefs.current[color]) {
-                        fileInputRefs.current[color]!.value = ""
-                      }
-                    }
-
-                    if (selectedColors.length === 0) {
+                <FieldSet>
+                  <FieldLegend>Images</FieldLegend>
+                  <FieldGroup>
+                    {selectedColors.length < 1 && (
+                      <div className="text-sm text-muted-foreground">
+                        Please select colors above to assign variant images.
+                      </div>
+                    )}
+                    {fields.map((img, index) => {
                       return (
-                        <div className="rounded-lg border border-dashed p-4 text-center text-sm text-muted-foreground">
-                          Please select colors above to assign variant images.
-                        </div>
-                      )
-                    }
-
-                    return (
-                      <Field
-                        data-invalid={fieldState.invalid}
-                      >
-                        <FieldLabel>Images</FieldLabel>
-
-                        <div className="space-y-3">
-                          {selectedColors.map((color) => {
-                            const hasImage = !!imagesRecord[color]
-
+                        <Controller
+                          key={img.id}
+                          name={`images.${index}.imageUrl`}
+                          control={form.control}
+                          render={({ field, fieldState }) => {
                             return (
-                              <div
-                                key={color}
-                                className="flex items-center justify-between rounded-lg border bg-card px-3 py-1.5"
-                              >
-                                
-                                  <span className="text-md font-medium capitalize" aria-invalid={fieldState.invalid}>
-                                    {color}
-                                  </span>
-                                
-
-                                <div className="flex items-center gap-3">
-                                  {hasImage ? (
-                                    <div className="group relative h-12 w-12 overflow-hidden rounded border">
+                              <Field data-invalid={fieldState.invalid}>
+                                <FieldLabel className="capitalize">
+                                  {img.color}
+                                </FieldLabel>
+                                <input
+                                  ref={(el) => {
+                                    fileInput.current[index] = el
+                                  }}
+                                  type="file"
+                                  className="hidden"
+                                  onChange={(e) => {
+                                    const file = e.target.files?.[0]
+                                    if (file) {
+                                      field.onChange(URL.createObjectURL(file))
+                                    }
+                                  }}
+                                />
+                                <div
+                                  onClick={() => {
+                                    fileInput.current[index]?.click()
+                                  }}
+                                  className={cn(
+                                    "relative flex h-24 w-24 cursor-pointer items-center justify-center overflow-hidden rounded-md border border-dashed transition-colors hover:bg-muted/50",
+                                    fieldState.invalid
+                                      ? "border-destructive"
+                                      : "border-input"
+                                  )}
+                                >
+                                  {field.value ? (
+                                    <>
                                       <img
-                                        src={imagesRecord[color]}
-                                        alt={`${color} variant preview`}
+                                        src={field.value}
+                                        alt={img.color}
                                         className="h-full w-full object-cover"
                                       />
                                       <button
                                         type="button"
-                                        onClick={() =>
-                                          removeImageForColor(color)
-                                        }
-                                        className="absolute inset-0 flex items-center justify-center bg-destructive/80 text-xs text-white opacity-0 transition-opacity group-hover:opacity-100"
-                                      >
-                                        ✕
-                                      </button>
-                                    </div>
-                                  ) : (
-                                    <>
-                                      {/* Capture DOM references dynamically into the ref lookup map */}
-                                      <input
-                                        type="file"
-                                        accept="image/*"
-                                        className="hidden"
-                                        ref={(el) => {
-                                          fileInputRefs.current[color] = el
+                                        onClick={(e) => {
+                                          e.stopPropagation()
+                                          field.onChange("")
+                                          if (fileInput.current[index]) {
+                                            fileInput.current[index].value = ""
+                                          }
                                         }}
-                                        onChange={(e) =>
-                                          handleFileChange(color, e)
-                                        }
-                                      />
-                                      <Button
-                                        type="button"
-                                        variant="outline"
-                                        size="sm"
-                                        onClick={() =>
-                                          fileInputRefs.current[color]?.click()
-                                        }
+                                        className="absolute top-1 right-1 rounded-full bg-black/60 p-0.5 text-white hover:bg-black/80"
                                       >
-                                        Upload Image
-                                      </Button>
+                                        <X className="h-3 w-3" />
+                                      </button>
                                     </>
+                                  ) : (
+                                    <div className="flex flex-col items-center justify-center gap-2 text-muted-foreground">
+                                      <ImagePlus className="h-6 w-6" />
+                                      <p className="text-sm font-semibold">
+                                        Uplaod Image
+                                      </p>
+                                    </div>
                                   )}
                                 </div>
-                              </div>
-                            )
-                          })}
-                        </div>
 
-                        {/* Displays the custom message detailing exactly which variants are empty */}
-                        {fieldState.invalid && (
-                          <FieldError>
-                            {fieldState.error?.message ||
-                              "Each selected variant needs an image."}
-                          </FieldError>
-                        )}
-                      </Field>
-                    )
-                  }}
-                />
+                                {fieldState.invalid && (
+                                  <FieldError errors={[fieldState.error]} />
+                                )}
+                              </Field>
+                            )
+                          }}
+                        />
+                      )
+                    })}
+                  </FieldGroup>
+                  {form.formState.errors.images?.root && (
+                    <FieldError errors={[form.formState.errors.images.root]} />
+                  )}
+                </FieldSet>
               </FieldGroup>
               <Field orientation="horizontal">
                 <Button

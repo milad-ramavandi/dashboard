@@ -15,7 +15,7 @@ const CardsList = ({ title }: { title: string }) => {
                     <div className="flex items-center gap-4">
                       <div className="relative h-12 w-12 overflow-hidden rounded-sm">
                         <img
-                          src={Object.values(item.images)[0]}
+                          src={item.images[0].imageUrl}
                           alt={item.name}
                           className="absolute top-0 left-0 h-full w-full object-cover"
                         />

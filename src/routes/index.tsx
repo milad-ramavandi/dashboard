@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router"
 import paths from "./paths"
-import Home from "@/screens/Home"
+import Home from "@/screens/home"
 import AppLayout from "@/components/layouts/AppLayout"
 import UsersPage from "@/screens/users"
 import UserPage from "@/screens/users/user"

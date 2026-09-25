@@ -42,7 +42,6 @@ export function DataTable<TData extends RowData>({
       rowSelection
     },
   })
-  console.log(rowSelection)
   return (
     <div className="space-y-4 overflow-hidden rounded-md border">
       {Object.keys(rowSelection).length > 0 && (
